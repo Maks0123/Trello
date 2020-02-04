@@ -1,6 +1,6 @@
-let noteIdCounter = 8;
-let columnIdCounter = 4;
-let draggedNote = null;
+let noteIdCounter = 8
+let columnIdCounter = 4
+let draggedNote = null
 
 document
     .querySelectorAll('.column')
@@ -16,12 +16,12 @@ document
 
             columnElement.innerHTML = 
             `
-            <p class="column-header">В плане</p>
+            <p class="column-header">To do</p>
 					<div data-notes>
 						
 					</div>
 					<p class="column-footer">
-						<span data-action-addNote class="action">+ Добавить карточку</span>
+						<span data-action-addNote class="action">Add card</span>
 					</p>
             `
             columnIdCounter++
@@ -69,8 +69,8 @@ function columnProcess(columnElement) {
        
       columnElement.addEventListener('drop', function(event){
         if (draggedNote) {
-           // return columnElement.querySelector('[data-notes]').append(draggedNote)
-           return columnElement.append(draggedNote)
+            return columnElement.querySelector('[data-notes]').append(draggedNote)
+         
         }
       })
 
@@ -87,12 +87,15 @@ function noteProcess(noteElement){
           })
           noteElement.addEventListener('blur', function(event){
               noteElement.removeAttribute('contenteditable', 'false')
-              noteElement.setAttribute('draggable')
-              noteElement.closest('.column').setAttribute('draggable')
-              
+
+                
               if(!noteElement.textContent.trim().length){
                 noteElement.remove()
               }
+              
+              noteElement.setAttribute('draggable')
+              noteElement.closest('.column').setAttribute('draggable')
+            
           })
           
           
@@ -106,9 +109,8 @@ noteElement.addEventListener('drop', drop_noteHandler)
       }
       
       
-      
 function dragstart_noteHandler(event){
-   let draggedNote = this
+  draggedNote = this
    this.classList.add('dragged')
    
    event.stopPropagation()
@@ -131,8 +133,8 @@ function dragover_noteHandler(event){
     event.preventDefault()
 
       if (this === draggedNote){
-    return
-  }
+     return
+     }
 }
 function dragleave_noteHandler(event){
     if (this === draggedNote){
@@ -141,7 +143,7 @@ function dragleave_noteHandler(event){
   this.classList.remove('under')
 }
 function drop_noteHandler(event){
- /* event.stopPropagation()
+  event.stopPropagation()
       if (this === draggedNote){
     return
   }
@@ -151,8 +153,7 @@ function drop_noteHandler(event){
    else {
  this.perentElement.insertBefore(draggedNote, this)
 }
-)/
- /* if (this.perentElement === draggedNote.perentElement){
+ if (this.perentElement === draggedNote.perentElement){
        const note = Array.from(this.parentElement.querySelectorAll('.note'))
        const indexA = note.indexOf(this)
        const indexB = note.indexOf(draggedNote)
@@ -167,10 +168,6 @@ function drop_noteHandler(event){
   else {
     this.perentElement.insertBefore(draggedNote, this)
   }
-  */
-
-  console.log(this)
-  console.log(draggedNote)
 }    
     
     
